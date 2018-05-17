@@ -15,7 +15,6 @@ export function login(email, password){
 		})
 		.then(res => res.json())
 		.then(userData => {
-      console.log("LOGGING IN", userData)
 			localStorage.setItem("token", userData.jwt)
 			dispatch({
 				type: "LOGIN_USER",
@@ -106,6 +105,37 @@ export const createUser = (user)=>{
       dispatch ({
         type: "LOGIN_USER",
         payload:userData
+      })
+    })
+  }
+}
+
+export const fetchBarns = ()=>{
+  return (dispatch)=>{
+    fetch(API_URL + '/barns')
+    .then(r=>r.json())
+    .then(barns => {
+      dispatch ({
+        type: "FETCH_BARNS",
+        payload: barns
+      })
+    })
+  }
+}
+
+
+export const createBarn = (barn)=>{
+  return (dispatch)=>{
+    fetch(API_URL + '/newbarn', {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify({ barn })
+    })
+    .then(r=>r.json())
+    .then(barnData => {
+      dispatch ({
+        type: "CREATE_BARN",
+        payload: barnData
       })
     })
   }

@@ -17,6 +17,10 @@ export const reducer = (state=defaultState, action)=>{
   		return defaultState
     case "SUBMIT_REPORT_CARD":
       return {...state}
+    case "CREATE_BARN":
+      return {...state, barns:[...state.barns, action.payload]}
+    case "FETCH_BARNS":
+      return {...state, barns:[...action.payload]}
     default:
       return state
   }
