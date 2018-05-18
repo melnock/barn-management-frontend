@@ -2,7 +2,8 @@ const defaultState = {
   currentUser: null,
   horses: [],
   selectedHorse: null,
-  barns: []
+  barns: [],
+  selectedBarn: null,
 }
 
 
@@ -13,6 +14,8 @@ export const reducer = (state=defaultState, action)=>{
       return {...state, currentUser: action.payload.user, horses: [...action.payload.horses], barns: [...action.payload.barns]}
     case 'SELECT_HORSE':
       return {...state, selectedHorse: action.payload}
+    case 'SELECT_BARN':
+      return {...state, selectedBarn: action.payload}
     case "LOGOUT":
   		return defaultState
     case "SUBMIT_REPORT_CARD":

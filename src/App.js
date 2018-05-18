@@ -9,7 +9,6 @@ import {getUser, logout} from './actions/actions'
 class App extends Component {
 
   componentDidMount(){
-    console.log(localStorage.getItem("token"))
 		if (localStorage.getItem("token")){
 			this.props.getUser()
 			.then(() => {
@@ -25,11 +24,11 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Stable Talk</h1>
         </header>
-				<button onClick={() => {
+				{this.props. currentUser ? <button onClick={() => {
 					this.props.logout()
 					this.props.history.push('/login')
-				}}>Logout</button>
-				{this.props.currentUser ? <Route path="/home" component={UserHorsesList}/> : 				<Route path="/login" component={Login} />}
+				}}>Logout</button> : null}
+				{this.props.currentUser ? <Route path="/home" component={UserHorsesList}/> : 	<Route path="/login" component={Login} />}
 			</div>
     );
   }

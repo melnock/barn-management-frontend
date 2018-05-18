@@ -27,13 +27,13 @@
   margin-top: 30px;
 }
 
-.horse-card{
+.horse-card, .barn-card{
   width: 30%;
   background-color: lightgrey;
   border-radius: 15px;
 }
 
-.horse-card img{
+.horse-card img, .barn-card img{
   width: 85%;
   border-radius: 10px;
 }

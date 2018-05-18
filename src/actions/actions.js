@@ -85,6 +85,13 @@ export const selectedHorse = (horse)=>{
   }
 }
 
+export const selectedBarn = (barn)=>{
+  return {
+    type: "SELECT_BARN",
+    payload: barn
+  }
+}
+
 export function logout(){
 	localStorage.removeItem("token")
 	return {
@@ -125,11 +132,12 @@ export const fetchBarns = ()=>{
 
 
 export const createBarn = (barn)=>{
+  console.log(barn)
   return (dispatch)=>{
     fetch(API_URL + '/newbarn', {
       method: "POST",
       headers: headers,
-      body: JSON.stringify({ barn })
+      body: JSON.stringify({ barn:{...barn, images: {...barn.images}, amenities: [...barn.amenities]} })
     })
     .then(r=>r.json())
     .then(barnData => {

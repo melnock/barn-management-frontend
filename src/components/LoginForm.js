@@ -23,7 +23,7 @@ class LoginForm extends React.Component{
 
   handleClick = (e)=>{
     this.setState({
-      signup:true
+      signup:!this.state.signup
     })
   }
 
@@ -35,7 +35,7 @@ class LoginForm extends React.Component{
           <input type="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password}/>
           <input type="submit"/>
         </form> : <Signup/>}
-        <button onClick={this.handleClick}> Sign Up! </button>
+        <button onClick={this.handleClick}> {this.state.signup ? "Already a user?" : "Sign Up!"} </button>
       </div>
     )
   }
