@@ -26,6 +26,7 @@ class Signup extends React.Component{
 
   handleChange = (e)=>{
     this.setState({
+      selected_barn: this.props.selectedBarn,
       user: {
         ...this.state.user,
         [e.target.name]: e.target.value
@@ -42,7 +43,13 @@ class Signup extends React.Component{
 
   handleCheckChange = (e)=>{
     this.setState({
-      [e.target.name]: !this.state[e.target.name]
+      new_barn: !this.state.new_barn,
+      selected_barn: 0,
+      user:{
+        ...this.state.user,
+        is_manager: !this.state.is_manager,
+        is_employee: !this.state.is_manager
+      }
     })
   }
 
@@ -50,6 +57,7 @@ class Signup extends React.Component{
     e.preventDefault()
     if (this.state.password === this.state.password_confirmation){
       this.props.createUser({...this.state.user, barn_id: this.state.selected_barn})
+      .then(this.props.history.push('/home'))
     }else{
       alert("Whoa, there! Your passwords must match!")
     }
@@ -64,7 +72,12 @@ class Signup extends React.Component{
     })
     return(
       <div>
+        { !this.state.new_barn ? <select name="selected_barn" placeholder="choose a barn" onChange={this.handleSelectChange} value={this.state.selected_barn}>
+        <option value="">Choose here</option>
+        {barns}
+        </select> : <BarnCreationForm/>}
         <form onSubmit={this.handleSubmit}>
+          <input type="checkbox" name="new_barn" placeholder="New Barn?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Barn?<br/>
           <input name="email" placeholder="email" onChange={this.handleChange} value={this.state.email}/><br/>
           <input type="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password}/><br/>
           <input type="password" placeholder="password confirmation" name="password_confirmation" onChange={this.handleChange} value={this.state.password_confirmation}/><br/>
@@ -72,16 +85,8 @@ class Signup extends React.Component{
           <input name="phone_number" placeholder="phone_number" onChange={this.handleChange} value={this.state.phone_number}/><br/>
           <input name="mailing_address" placeholder="mailing_address" onChange={this.handleChange} value={this.state.mailing_address}/><br/>
           <input name="emergency_contact" placeholder="emergency_contact" onChange={this.handleChange} value={this.state.emergency_contact}/><br/>
-          <input type="checkbox" name="is_manager" placeholder="Manager?" onChange={this.handleCheckChange} value={this.state.is_manager}/> Manager?<br/>
-          <input type="checkbox" name="is_employee" placeholder="Employee?" onChange={this.handleCheckChange} value={this.state.is_employee}/> Employee?<br/>
-          { !this.state.new_barn ? <select name="selected_barn" placeholder="choose a barn" onChange={this.handleSelectChange} value={this.state.selected_barn}>
-            <option value="">Choose here</option>
-            {barns}
-          </select> : null}
-          <input type="checkbox" name="new_barn" placeholder="New Barn?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Barn?<br/>
           <input type="submit"/>
         </form>
-        {this.state.new_barn ? <BarnCreationForm/> : null}
       </div>
     )
   }
@@ -89,7 +94,8 @@ class Signup extends React.Component{
 
 function mapStateToProps(state){
   return{
-    barns: state.barns
+    barns: state.barns,
+    selectedBarn: state.selectedBarn
   }
 }
 

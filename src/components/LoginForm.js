@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {login} from '../actions/actions'
 import Signup from './Signup'
+import {withRouter} from 'react-router-dom'
 
 class LoginForm extends React.Component{
   state={
@@ -19,6 +20,7 @@ class LoginForm extends React.Component{
   handleSubmit = (e)=>{
     e.preventDefault()
     this.props.login(this.state.email, this.state.password)
+    .then(()=> this.props.history.push('/home'))
   }
 
   handleClick = (e)=>{
@@ -42,4 +44,4 @@ class LoginForm extends React.Component{
 }
 
 
-export default connect(null, {login})(LoginForm)
+export default withRouter(connect(null, {login})(LoginForm))

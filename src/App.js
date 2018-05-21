@@ -14,7 +14,9 @@ class App extends Component {
 			.then(() => {
 				this.props.history.push('/home')
 			})
-		}
+		}else{
+      this.props.history.push('/login')
+    }
 	}
 
 
@@ -23,12 +25,13 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Stable Talk</h1>
+          {this.props.currentUser ? <button onClick={() => {
+            this.props.logout()
+            this.props.history.push('/login')
+          }}>Logout</button> : null}
         </header>
-				{this.props. currentUser ? <button onClick={() => {
-					this.props.logout()
-					this.props.history.push('/login')
-				}}>Logout</button> : null}
-				{this.props.currentUser ? <Route path="/home" component={UserHorsesList}/> : 	<Route path="/login" component={Login} />}
+				<Route path="/home" component={UserHorsesList}/>
+        <Route path="/login" component={Login} />
 			</div>
     );
   }
@@ -36,7 +39,8 @@ class App extends Component {
 
 function mapStateToProps(state){
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    horses: state.horses
   }
 }
 

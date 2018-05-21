@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {createBarn} from '../actions/actions'
 
-class Signup extends React.Component{
+class BarnCreationForm extends React.Component{
   state={
     barn: {amenities: [],
     board_cost:"",
@@ -90,7 +90,7 @@ class Signup extends React.Component{
     this.setState({
       barn: {
         ...this.state.barn,
-      amenities: [...this.state.barn.amenities, this.state.amenity]
+        amenities: [...this.state.barn.amenities, this.state.amenity]
       },
       amenity: ""
     })
@@ -125,4 +125,4 @@ class Signup extends React.Component{
 }
 
 
-export default connect(null, {createBarn})(Signup)
+export default connect(null, {createBarn})(BarnCreationForm)

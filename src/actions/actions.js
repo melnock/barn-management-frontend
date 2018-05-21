@@ -132,7 +132,6 @@ export const fetchBarns = ()=>{
 
 
 export const createBarn = (barn)=>{
-  console.log(barn)
   return (dispatch)=>{
     fetch(API_URL + '/newbarn', {
       method: "POST",
@@ -144,6 +143,58 @@ export const createBarn = (barn)=>{
       dispatch ({
         type: "CREATE_BARN",
         payload: barnData
+      })
+    })
+  }
+}
+
+export const createVet = (vet)=>{
+  return (dispatch)=>{
+    fetch(API_URL + '/newvet', {
+      method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify({vet})
+    })
+    .then(r=>r.json())
+    .then(vetData => {
+      dispatch ({
+        type: "CREATE_VET",
+        payload: vetData
+      })
+    })
+  }
+}
+
+export const createFarrier = (farrier)=>{
+  return (dispatch)=>{
+    fetch(API_URL + '/newfarrier', {
+      method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify({farrier})
+    })
+    .then(r=>r.json())
+    .then(farrierData => {
+      dispatch ({
+        type: "CREATE_FARRIER",
+        payload: farrierData
+      })
+    })
+  }
+}
+
+export const createHorse = (horse)=>{
+  console.log(horse)
+  return (dispatch)=>{
+    fetch(API_URL + '/newhorse', {
+      method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify( {horse})
+    })
+    .then(r=>r.json())
+    .then(horseData => {
+      dispatch ({
+        type: "CREATE_HORSE",
+        payload: horseData
       })
     })
   }
