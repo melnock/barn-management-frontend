@@ -14,6 +14,7 @@ class HorseCreationForm extends React.Component{
     stall_id: "",
     vet_id: 1,
     farrier_id:1,
+    gender:"",
     tack: {
       saddle:"",
       bridle: "",
@@ -31,12 +32,25 @@ class HorseCreationForm extends React.Component{
     new_farrier: false,
   }
 
+  componentDidMount(){
+    if (this.props.selectedHorse) {
+      this.editHorse()
+    }
+  }
+
   handleChange = (e)=>{
     this.setState({
       horse: {
         ...this.state.horse,
         [e.target.name]: e.target.value
       }
+    })
+  }
+
+  handleNewVetFarrier = (vetOrFarrier) =>{
+    const key = "new_" + vetOrFarrier
+    this.setState({
+      [key]: false,
     })
   }
 
@@ -138,13 +152,19 @@ class HorseCreationForm extends React.Component{
     })
   }
 
+  editHorse = ()=>{
+    this.setState({
+      horse: {...this.props.selectedHorse}
+    })
+  }
+
   render(){
     console.log("state", this.state);
     console.log("props", this.props);
     const supplements = this.state.horse.supplements.map((am, ind) => {return <li key={ind} value={ind}> {am} <button onClick={this.removeSupplement}> x </button></li>})
     const blanketSelect = ["below_60", "below_40", "below_30", "below_20"].map(num => {
       return(
-        <select onChange={this.handleBlanketSelect} name={num} value={this.state.horse.blankets[num].type}>
+        <select onChange={this.handleBlanketSelect} name={num} value={this.state.horse.blankets[num].type} key={num}>
           <option value="">Select Blanket Weight</option>
           <option value="Sheet">Sheet</option>
           <option value="Medium">Medium</option>
@@ -155,61 +175,81 @@ class HorseCreationForm extends React.Component{
     })
     const vets = this.props.vets.map((vet)=>{
       return (
-        <option value={vet.id}> {vet.name} | {vet.practice_name}</option>
+        <option value={vet.id} key={vet.id}> {vet.name} | {vet.practice_name}</option>
       )
     })
     const farriers = this.props.farriers.map((farrier)=>{
       return (
-        <option value={farrier.id}> {farrier.name} | {farrier.practice_name}</option>
+        <option value={farrier.id} key={farrier.id}> {farrier.name} | {farrier.practice_name}</option>
       )
     })
 
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input name="name" placeholder="name" onChange={this.handleChange} value={this.state.horse.name}/><br/>
-          Supplements:
-          <ul>
-          {supplements}
-          </ul>
-          <input name="supplement" placeholder="supplements" onChange={this.handleSupplementChange} value={this.state.supplement}/><button onClick={this.addSupplement}> + </button><br/>
-          <input name="birth_year" placeholder="birth_year" onChange={this.handleChange} value={this.state.horse.birth_year}/><br/>
-          <input name="image" placeholder="image" onChange={this.handleChange} value={this.state.horse.image}/><br/>
-          <input name="paddock_id" placeholder="paddock number" onChange={this.handleChange} value={this.state.horse.paddock_id}/><br/>
-          <input name="stall_id" placeholder="stall number" onChange={this.handleChange} value={this.state.horse.stall_id}/><br/>
-          Blankets:<br/>
-            Below 60 <input name="below_60" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_60.color}/><br/>
-            {blanketSelect[0]}
-            <br/>
-            Below 40<input name="below_40" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_40.color}/><br/>
-            {blanketSelect[1]}
-            <br/>
-            Below 30<input name="below_30" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_30.color}/><br/>
-            {blanketSelect[2]}
-            <br/>
-            Below 20<input name="below_20" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_20.color}/><br/>
-            {blanketSelect[3]}
-            <br/>
-          Tack:<br/>
-            <input name="saddle" placeholder="saddle" onChange={this.handleTackChange} value={this.state.horse.tack.saddle}/><br/>
-            <input name="bridle" placeholder="bridle" onChange={this.handleTackChange} value={this.state.horse.tack.bridle}/><br/>
-            <input name="saddle_pads" placeholder="saddle pads" onChange={this.handleTackChange} value={this.state.horse.tack.saddle_pads}/><br/>
-            <input name="special_equipment" placeholder="special equipment" onChange={this.handleTackChange} value={this.state.horse.tack.special_equipment}/><br/>
+          <div className="basic-info">
+            <input name="name" placeholder="name" onChange={this.handleChange} value={this.state.horse.name}/><br/>
+            <input name="birth_year" placeholder="birth_year" onChange={this.handleChange} value={this.state.horse.birth_year}/><br/>
+            <input name="image" placeholder="image" onChange={this.handleChange} value={this.state.horse.image}/><br/>
+            <select onChange={this.handleChange} name="gender" value={this.state.horse.gender}>
+              <option value="">Select Gender</option>
+              <option value="Mare">Mare</option>
+              <option value="Gelding">Gelding</option>
+              <option value="Stallion">Stallion</option>
+            </select>
+          </div>
+          <div className="supplements">
+            Supplements:
+            <ul>
+            {supplements}
+            </ul>
+            <input name="supplement" placeholder="supplements" onChange={this.handleSupplementChange} value={this.state.supplement}/><button onClick={this.addSupplement}> + </button><br/>
+          </div>
+          <div className="barn-info">
+            <input name="paddock_id" placeholder="paddock number" onChange={this.handleChange} value={this.state.horse.paddock_id}/><br/>
+            <input name="stall_id" placeholder="stall number" onChange={this.handleChange} value={this.state.horse.stall_id}/><br/>
+          </div>
+          <div className="blankets">
+            Blankets:<br/>
+              Below 60 <input name="below_60" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_60.color}/><br/>
+              {blanketSelect[0]}
+              <br/>
+              Below 40<input name="below_40" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_40.color}/><br/>
+              {blanketSelect[1]}
+              <br/>
+              Below 30<input name="below_30" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_30.color}/><br/>
+              {blanketSelect[2]}
+              <br/>
+              Below 20<input name="below_20" placeholder="blanket description" onChange={this.handleBlanketChange} value={this.state.horse.blankets.below_20.color}/><br/>
+              {blanketSelect[3]}
+              <br/>
+          </div>
+          <div className="tack">
+            Tack:<br/>
+              <input name="saddle" placeholder="saddle" onChange={this.handleTackChange} value={this.state.horse.tack.saddle}/><br/>
+              <input name="bridle" placeholder="bridle" onChange={this.handleTackChange} value={this.state.horse.tack.bridle}/><br/>
+              <input name="saddle_pads" placeholder="saddle pads" onChange={this.handleTackChange} value={this.state.horse.tack.saddle_pads}/><br/>
+              <input name="special_equipment" placeholder="special equipment" onChange={this.handleTackChange} value={this.state.horse.tack.special_equipment}/><br/>
+          </div>
 
           <input type="submit"/>
-          </form>
-          
-          Vet: <br/>
-          {this.state.new_vet ? <VetCreationForm/> : <select name="vet" onChange={this.handleChange} value={this.state.horse.vet}><br/>
-          {vets}
-          </select>}<br/>
-          <input type="checkbox" name="new_vet" placeholder="New Vet?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Vet?<br/>
+        </form>
 
-          Farrier: <br/>
-          {this.state.new_farrier ? <FarrierCreationForm/> : <select name="farrier" onChange={this.handleChange} value={this.state.horse.farrier}><br/>
-          {farriers}
-          </select>}<br/>
-          <input type="checkbox" name="new_farrier" placeholder="New Farrier?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Farrier?<br/>
+          <div className="vet-info">
+            Vet: <br/>
+            {this.state.new_vet ? <VetCreationForm stateFix= {this.handleNewVetFarrier}/> : <select name="vet" onChange={this.handleChange} value={this.state.horse.vet}>
+            {vets}
+            </select>}<br/>
+            <input type="checkbox" name="new_vet" placeholder="New Vet?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Vet?<br/>
+          </div>
+
+          <div className="farrier-info">
+            Farrier: <br/>
+            {this.state.new_farrier ? <FarrierCreationForm stateFix= {this.handleNewVetFarrier}/> : <select name="farrier" onChange={this.handleChange} value={this.state.horse.farrier}>
+            {farriers}
+            </select>}<br/>
+            <input type="checkbox" name="new_farrier" placeholder="New Farrier?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Farrier?<br/>
+          </div>
       </div>
     )
   }
@@ -222,7 +262,8 @@ function mapStateToProps(state){
     paddocks: state.paddocks,
     stalls: state.stalls,
     currentUser: state.currentUser,
-    current_barn: state.current_barn
+    current_barn: state.current_barn,
+    selectedHorse: state.selectedHorse
   }
 }
 

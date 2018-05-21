@@ -99,23 +99,29 @@ class BarnCreationForm extends React.Component{
   render(){
     const amenities = this.state.barn.amenities.map((am, ind) => {return <li key={ind} value={ind}> {am} <button onClick={this.removeAmenity}> x </button></li>})
     return(
-      <div>
+      <div className="barn-form">
         <form onSubmit={this.handleSubmit}>
           <input name="name" placeholder="name" onChange={this.handleChange} value={this.state.barn.name}/><br/>
-          Amenities:
-          <ul>
-          {amenities}
-          </ul>
-          <input name="amenity" placeholder="amenities" onChange={this.handleAmenityChange} value={this.state.amenity}/><button onClick={this.addAmenity}> + </button><br/>
-          <input name="board_cost" placeholder="board_cost" onChange={this.handleChange} value={this.state.barn.board_cost}/><br/>
-          <input name="address" placeholder="address" onChange={this.handleChange} value={this.state.barn.address}/><br/>
-          <input name="number_of_paddocks" placeholder="number of paddocks" onChange={this.handleChange} value={this.state.barn.number_of_paddocks}/><br/>
-          <input name="number_of_stalls" placeholder="number of stalls" onChange={this.handleChange} value={this.state.barn.number_of_stalls}/><br/>
-          Images:<br/>
-          Main<input name="main" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.main}/><br/>
-          Indoor<input name="indoor_arena" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.indoor_arena}/><br/>
-          Outdoor<input name="outdoor_arena" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.outdoor_arena}/><br/>
-          Paddocks<input name="paddocks" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.paddocks}/><br/>
+          <div className="amenities">
+            Amenities:
+            <ul>
+            {amenities}
+            </ul>
+            <input name="amenity" placeholder="amenities" onChange={this.handleAmenityChange} value={this.state.amenity}/><button onClick={this.addAmenity}> + </button><br/>
+          </div>
+          <div className="basic-info">
+            <input name="board_cost" placeholder="board_cost" onChange={this.handleChange} value={this.state.barn.board_cost}/><br/>
+            <input name="address" placeholder="address" onChange={this.handleChange} value={this.state.barn.address}/><br/>
+            <input name="number_of_paddocks" placeholder="number of paddocks" onChange={this.handleChange} value={this.state.barn.number_of_paddocks}/><br/>
+            <input name="number_of_stalls" placeholder="number of stalls" onChange={this.handleChange} value={this.state.barn.number_of_stalls}/><br/>
+          </div>
+          <div className="images">
+            Images:<br/>
+            Main<input name="main" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.main}/><br/>
+            Indoor<input name="indoor_arena" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.indoor_arena}/><br/>
+            Outdoor<input name="outdoor_arena" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.outdoor_arena}/><br/>
+            Paddocks<input name="paddocks" placeholder="image url" onChange={this.handleImageChange} value={this.state.barn.images.paddocks}/><br/>
+          </div>
 
           <input type="submit"/>
         </form>

@@ -23,6 +23,7 @@ class FarrierCreationForm extends React.Component{
     e.preventDefault()
     console.log(this.state)
     this.props.createFarrier({...this.state})
+    .then(()=>this.props.stateFix("farrier"))
   }
 
   render(){
@@ -30,7 +31,7 @@ class FarrierCreationForm extends React.Component{
     console.log("props", this.props);
 
     return(
-      <div>
+      <div className="farrier-form">
         <form onSubmit={this.handleSubmit}>
           <input name="name" placeholder="name" onChange={this.handleChange} value={this.state.name}/><br/>
           <input name="practice_name" placeholder="practice_names" onChange={this.handleChange} value={this.state.practice_name}/>

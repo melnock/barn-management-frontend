@@ -71,11 +71,13 @@ class Signup extends React.Component{
       )
     })
     return(
-      <div>
-        { !this.state.new_barn ? <select name="selected_barn" placeholder="choose a barn" onChange={this.handleSelectChange} value={this.state.selected_barn}>
-        <option value="">Choose here</option>
-        {barns}
-        </select> : <BarnCreationForm/>}
+      <div className="user-form">
+        <div className="barn-choice">
+          { !this.state.new_barn ? <select name="selected_barn" placeholder="choose a barn" onChange={this.handleSelectChange} value={this.state.selected_barn}>
+          <option value="">Choose here</option>
+          {barns}
+          </select> : <BarnCreationForm/>}
+        </div>
         <form onSubmit={this.handleSubmit}>
           <input type="checkbox" name="new_barn" placeholder="New Barn?" onChange={this.handleCheckChange} value={this.state.new_barn}/> New Barn?<br/>
           <input name="email" placeholder="email" onChange={this.handleChange} value={this.state.email}/><br/>

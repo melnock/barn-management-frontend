@@ -14,7 +14,7 @@ export const reducer = (state=defaultState, action)=>{
   console.log(action)
   switch (action.type) {
     case 'LOGIN_USER':
-      return {...state, currentUser: action.payload.user, horses: [...action.payload.horses], current_barn:action.payload.current_barn, barns: [...action.payload.barns], vets: [...action.payload.vets], farriers: [...action.payload.farriers], paddocks: [...action.payload.paddocks], stalls: [...action.payload.stalls]}
+      return {...state, currentUser: action.payload.user, users:[...action.payload.users], horses: [...action.payload.horses], current_barn:action.payload.current_barn, barns: [...action.payload.barns], vets: [...action.payload.vets], farriers: [...action.payload.farriers], paddocks: [...action.payload.paddocks], stalls: [...action.payload.stalls]}
     case 'SELECT_HORSE':
       return {...state, selectedHorse: action.payload}
     case 'SELECT_BARN':

@@ -150,7 +150,7 @@ export const createBarn = (barn)=>{
 
 export const createVet = (vet)=>{
   return (dispatch)=>{
-    fetch(API_URL + '/newvet', {
+    return fetch(API_URL + '/newvet', {
       method: "POST",
       headers: authedHeaders(),
       body: JSON.stringify({vet})
@@ -167,7 +167,7 @@ export const createVet = (vet)=>{
 
 export const createFarrier = (farrier)=>{
   return (dispatch)=>{
-    fetch(API_URL + '/newfarrier', {
+    return fetch(API_URL + '/newfarrier', {
       method: "POST",
       headers: authedHeaders(),
       body: JSON.stringify({farrier})

@@ -31,9 +31,11 @@ class UserHorsesList extends React.Component{
         {this.props.current_barn ? <h1> Welcome to {this.props.current_barn.name}</h1> : "No Barn???"}
       <div className="horse-list">
         {this.props.selectedHorse ? <HorseShowPage history={this.props.history}/> :
-        <div> {horses} </div>
-        }
+        <div> {horses}
         {this.state.new_horse ? <HorseCreationForm /> : <button onClick={this.handleClick}> Add A Horse </button>}
+        </div>
+
+        }
       </div>
       </div>
     )

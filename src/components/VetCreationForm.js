@@ -21,8 +21,8 @@ class VetCreationForm extends React.Component{
 
   handleSubmit = (e)=>{
     e.preventDefault()
-    console.log(this.state)
     this.props.createVet({...this.state})
+      .then((vet)=>this.props.stateFix("vet"))
   }
 
   render(){
@@ -30,7 +30,7 @@ class VetCreationForm extends React.Component{
     console.log("props", this.props);
 
     return(
-      <div>
+      <div className="vet-form">
         <form onSubmit={this.handleSubmit}>
           <input name="name" placeholder="name" onChange={this.handleChange} value={this.state.name}/><br/>
           <input name="practice_name" placeholder="practice_names" onChange={this.handleChange} value={this.state.practice_name}/>

@@ -42,6 +42,12 @@
   width: 100%;
 }
 
+.horse-show-image{
+  float:left;
+  width: 40%;
+  margin: 40px;
+}
+
 .label{
   width:10%;
 }
