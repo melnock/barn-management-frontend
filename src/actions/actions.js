@@ -185,7 +185,7 @@ export const createFarrier = (farrier)=>{
 export const createHorse = (horse)=>{
   console.log(horse)
   return (dispatch)=>{
-    fetch(API_URL + '/newhorse', {
+    return fetch(API_URL + '/newhorse', {
       method: "POST",
       headers: authedHeaders(),
       body: JSON.stringify( {horse})
@@ -203,7 +203,7 @@ export const createHorse = (horse)=>{
 export const editHorse = (horse)=>{
   console.log(horse)
   return (dispatch)=>{
-    fetch(API_URL + `/horses/${horse.id}`, {
+    return fetch(API_URL + `/horses/${horse.id}`, {
       method: "PATCH",
       headers: authedHeaders(),
       body: JSON.stringify( {horse})
@@ -214,6 +214,21 @@ export const editHorse = (horse)=>{
         type: "CREATE_HORSE",
         payload: horseData
       })
+    })
+  }
+}
+
+export const updateUser = (user)=>{
+  console.log(user)
+  return (dispatch)=>{
+    fetch(API_URL + `/users/${user.id}`, {
+      method: "PATCH",
+      headers: authedHeaders(),
+      body: JSON.stringify( {user})
+    })
+    .then(r=>r.json())
+    .then(userData => {
+      console.log(userData)
     })
   }
 }

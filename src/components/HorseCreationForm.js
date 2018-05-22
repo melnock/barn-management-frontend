@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {createHorse, editHorse} from '../actions/actions'
 import VetCreationForm from './VetCreationForm'
 import FarrierCreationForm from './FarrierCreationForm'
+import {withRouter} from 'react-router-dom'
+
 
 class HorseCreationForm extends React.Component{
   state={
@@ -75,7 +77,7 @@ class HorseCreationForm extends React.Component{
   handleSubmit = (e)=>{
     e.preventDefault()
     if (this.state.edit){
-      this.props.editHorse({...this.state.horse, barn_id: this.props.current_barn.id, user_id: this.props.currentUser.id})
+      this.props.editHorse({...this.state.horse, barn_id: this.props.current_barn.id})
       .then(this.props.history.push('/home'))
     }
     else{
@@ -169,7 +171,7 @@ class HorseCreationForm extends React.Component{
   render(){
     console.log("state", this.state);
     console.log("props", this.props);
-    const supplements = this.state.horse.supplements.map((am, ind) => {return <li key={ind} value={ind}> {am} <button onClick={this.removeSupplement}> x </button></li>})
+    const supplements = this.state.horse.supplements.map((am, ind) => {return <li key={ind} value={ind}> {am} <button onClick={this.removeSupplement} className="plus-button" value={ind}>x</button></li>})
     const blanketSelect = ["below_60", "below_40", "below_30", "below_20"].map(num => {
       return(
         <select onChange={this.handleBlanketSelect} name={num} value={this.state.horse.blankets[num].type} key={num}>
@@ -211,7 +213,7 @@ class HorseCreationForm extends React.Component{
             <ul>
             {supplements}
             </ul>
-            <input name="supplement" placeholder="supplements" onChange={this.handleSupplementChange} value={this.state.supplement}/><button onClick={this.addSupplement}> + </button><br/>
+            <input className="shorter-input" name="supplement" placeholder="supplements" onChange={this.handleSupplementChange} value={this.state.supplement}/><button className="plus-button" onClick={this.addSupplement}>+</button><br/>
           </div>
           <div className="barn-info">
             <input name="paddock_id" placeholder="paddock number" onChange={this.handleChange} value={this.state.horse.paddock_id}/><br/>
@@ -276,4 +278,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {createHorse, editHorse})(HorseCreationForm)
+export default withRouter(connect(mapStateToProps, {createHorse, editHorse})(HorseCreationForm))

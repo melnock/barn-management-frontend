@@ -15,7 +15,7 @@ class BarnContainer extends React.Component{
       return <BarnCard barn={barn} key={barn.id}/>
     })
     return(
-      <div>
+      <div className="barn-list">
         {barns}
       </div>
     )

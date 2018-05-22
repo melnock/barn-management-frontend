@@ -6,7 +6,9 @@ const defaultState = {
   selectedBarn: null,
   current_barn: null,
   paddocks: [],
-  stalls: []
+  stalls: [],
+  vets: [],
+  farriers: []
 }
 
 

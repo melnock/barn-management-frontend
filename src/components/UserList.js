@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {updateUser} from '../actions/actions'
+import {updateUser, selectedHorse} from '../actions/actions'
+import {withRouter} from 'react-router-dom'
+
 
 class UserList extends React.Component{
 
@@ -11,37 +13,53 @@ class UserList extends React.Component{
 
   handleClick=(e)=>{
     this.setState({
-      [e.target.name]: !this.state.[e.target.name]
+      [e.target.name]: !this.state[e.target.name]
     })
   }
 
   render(){
+    const userHorses = this.props.horses.filter((horse)=>{
+      return this.props.user.id === horse.user_id
+    })
+
+    const ponyPics = userHorses.map((horse)=>{
+      return (
+        <a key={horse.id} onClick={(e)=>{
+          e.preventDefault()
+          this.props.selectedHorse(horse)
+          this.props.history.push(`/horses/${horse.id}`)
+        }}><img className="mini-icon" alt="mini-horse" src={horse.image}/>
+        </a>
+      )
+    })
+    const employeeOwner =  this.props.user.is_employee ?
+          <div><p>Employee</p>
+          <button name="promote" onClick={this.handleClick}>
+            Promote
+          </button>
+          </div>
+          :
+          <div><p>Owner</p>
+          <button name="employ" onClick={this.handleClick}>
+            Employ
+            </button>
+          </div>
     return(
-      <div className="user-card" onClick={this.handleClick}>
-        <h1> {this.props.user.name}</h1>
-        <p> {this.props.user.is_manager ? <div>
-            "Manager | Employee"
-            <button name="demotion" onClick={this.handleDemotion}>
-              Demotion
+      <div className="user-card">
+        <p> {this.props.user.name} </p>
+        {this.props.user.is_manager ? <div>
+            <p>Manager | Employee</p>
+            <button name="demote" onClick={this.handleDemotion}>
+              Demote
               </button>
             </div>
          :
-          {this.props.user.is_employee ?
-            <div>"Employee"
-            <button name="manager" onClick={this.handleClick}>
-              Make Manager
-            </button>
-            </div>
-            :
-            <div>"Owner"
-            <button name="employee" onClick={this.handleClick}>
-              Make Employee
-              </button>
-            </div>}
+          employeeOwner
           }
-        </p>
+
         <p> {this.props.user.phone_number}</p>
-        <p> {this.props.user.emergency_contact}</p>
+        <p> Emergncy Contact: {this.props.user.emergency_contact}</p>
+        {ponyPics}
       </div>
     )
   }
@@ -49,9 +67,10 @@ class UserList extends React.Component{
 
 function mapStateToProps(state){
   return{
-    users: state.users
+    users: state.users,
+    horses: state.horses
   }
 }
 
 
-export default connect(mapStateToProps, {updateUser})(UserList)
+export default withRouter(connect(mapStateToProps, {updateUser, selectedHorse})(UserList))

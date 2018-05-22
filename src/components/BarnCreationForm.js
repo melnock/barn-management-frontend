@@ -97,7 +97,7 @@ class BarnCreationForm extends React.Component{
   }
 
   render(){
-    const amenities = this.state.barn.amenities.map((am, ind) => {return <li key={ind} value={ind}> {am} <button onClick={this.removeAmenity}> x </button></li>})
+    const amenities = this.state.barn.amenities.map((am, ind) => {return <li key={ind} value={ind}> {am} <button className="plus-button" onClick={this.removeAmenity}>x</button></li>})
     return(
       <div className="barn-form">
         <form onSubmit={this.handleSubmit}>
@@ -107,7 +107,7 @@ class BarnCreationForm extends React.Component{
             <ul>
             {amenities}
             </ul>
-            <input name="amenity" placeholder="amenities" onChange={this.handleAmenityChange} value={this.state.amenity}/><button onClick={this.addAmenity}> + </button><br/>
+            <input className="shorter-input" name="amenity" placeholder="amenities" onChange={this.handleAmenityChange} value={this.state.amenity}/><button className="plus-button" onClick={this.addAmenity}>+</button><br/>
           </div>
           <div className="basic-info">
             <input name="board_cost" placeholder="board_cost" onChange={this.handleChange} value={this.state.barn.board_cost}/><br/>

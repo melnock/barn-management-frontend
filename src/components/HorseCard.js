@@ -7,7 +7,7 @@ class HorseCard extends React.Component{
 
   handleClick=()=>{
     this.props.selectedHorse(this.props.horse)
-    this.props.history.push('/horses'+ `/${this.props.horse.id}`)
+    this.props.history.push(`/horses/${this.props.horse.id}`)
   }
 
   render(){

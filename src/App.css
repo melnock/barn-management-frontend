@@ -1,5 +1,13 @@
-.App {
+body {
   text-align: center;
+  background-color: #401863;
+  color: #BBB;
+  font-size: 1em;
+  width:80%;
+  margin: auto;
+  /* font-family: 'Arvo', serif;
+  font-family: 'Pacifico', cursive; */
+  font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .App-logo {
@@ -8,33 +16,151 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-color: #BBB;
+  font-family: 'Pacifico', cursive;
+  height: 70px;
+  padding: 10px;
+  color: #401863;
+  margin: 20px;
+  width: 85%;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #BBB;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 1em;
+  padding: 5px;
 }
 
 .App-intro {
   font-size: large;
 }
-.horse-list{
+
+/* general styling */
+
+p{
+  font-size: .5em;
+}
+
+.nav a, .nav button{
+  text-decoration: none;
+  font-size: .75em;
+  padding: 0 30px;
+  margin: 3px;
+  background-color: #401863;
+  color: #BBB;
+  border-style:none;
+  width: 30%;
+}
+
+.mini-icon{
+  border-radius: 60px;
+  width: 25%;
+  height:auto;
+}
+
+/* table styling */
+
+table{
+  margin: auto;
+  padding: 30px;
+  text-align: left;
+}
+
+th{
+  background-color: #BBB;
+  color: #401863;
+  padding: 5px;
+  font-size: .75em;
+  border-radius: 3px;
+}
+
+td{
+  font-size: .75em;
+  padding: 5px;
+}
+
+tr{
+  color: #BBB;
+}
+
+tr:nth-child(even) {
+  background-color: #BBB;
+  color: #401863;
+}
+
+
+/* form styling */
+
+input{
+  color: #401863;
+  background-color: #BBB;
+  width: 60%;
+  margin: 8px 0;
+}
+
+button, input[type=submit], a{
+  color: #401863;
+  background-color: #BBB;
+  border-radius: 5px;
+  width: 41%;
+  margin: 8px 0;
+  font-family: 'Arvo', serif;
+  border-style:none;
+}
+
+input[type=checkbox]{
+  font-size: 1em;
+  width: 3%
+}
+
+.shorter-input{
+  width: 54%;
+}
+
+.plus-button{
+  width: 25px;
+  padding-right: 8px;
+  text-align: center;
+  margin: 5px;
+}
+
+/* card styling */
+
+.horse-list, .barn-list, .user-list{
   display:flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 30px;
+  width: 100%;
 }
 
 .horse-card, .barn-card{
+  box-shadow: 0 0 10px #BBB;
   width: 30%;
-  background-color: lightgrey;
+  background-color: #BBB;
   border-radius: 15px;
+  color: #401863;
+  font-family: 'Arvo', serif;
+
 }
+
+ .user-card{
+   width: 30%;
+   background-color: #BBB;
+   border-radius: 15px;
+   color: #401863;
+   font-family: 'Arvo', serif;
+ }
 
 .horse-card img, .barn-card img{
   width: 85%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #BBB;
+}
+
+.horse-card h1, .barn-card h1{
+  font-size: 65%;
   border-radius: 10px;
 }
 
@@ -46,6 +172,8 @@
   float:left;
   width: 40%;
   margin: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #BBB;
 }
 
 .label{
@@ -82,6 +210,38 @@
     height: 35px; /* Slider handle height */
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
+}
+
+/* Accordion style for Dashboard Style the buttons that are used to open and close the accordion panel */
+.accordion {
+    background-color: #BBB;
+    color: #401863;
+    cursor: pointer;
+    padding: 5px;
+    width: 80%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin: 10px auto;
+    border-radius: 5px;
+}
+
+.plus-accordion{
+  float:right;
+  padding-right: 10px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
 }
 
 @keyframes App-logo-spin {
