@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {createUser, fetchBarns} from '../actions/actions'
 import BarnCreationForm from './BarnCreationForm'
+import {withRouter} from 'react-router-dom'
 
 
 class Signup extends React.Component{
@@ -63,8 +64,12 @@ class Signup extends React.Component{
     }
   }
 
+  handleClick=()=>{
+    this.props.history.push('/login')
+  }
+
   render(){
-    console.log(this.state)
+    console.log(this.props)
     const barns = this.props.barns.map((barn)=>{
       return (
         <option value={barn.id}> {barn.name} </option>
@@ -89,6 +94,7 @@ class Signup extends React.Component{
           <input name="emergency_contact" placeholder="emergency_contact" onChange={this.handleChange} value={this.state.emergency_contact}/><br/>
           <input type="submit"/>
         </form>
+        <button onClick={this.handleClick}> Already a user? </button>
       </div>
     )
   }
@@ -102,4 +108,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {createUser, fetchBarns})(Signup)
+export default withRouter(connect(mapStateToProps, {createUser, fetchBarns})(Signup))

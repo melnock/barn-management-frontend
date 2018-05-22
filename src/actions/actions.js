@@ -1,7 +1,7 @@
 
 const API_URL = "http://localhost:3000/api/v1"
 const token = localStorage.getItem("token")
-const headers = { "Content-Type": "application/json"}
+const headers = { 'Access-Control-Allow-Origin':'*', "Content-Type": "application/json", "Accept": "application/json"}
 function authedHeaders(){
   return {...headers, "Authorization": token}
 }
@@ -187,6 +187,24 @@ export const createHorse = (horse)=>{
   return (dispatch)=>{
     fetch(API_URL + '/newhorse', {
       method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify( {horse})
+    })
+    .then(r=>r.json())
+    .then(horseData => {
+      dispatch ({
+        type: "CREATE_HORSE",
+        payload: horseData
+      })
+    })
+  }
+}
+
+export const editHorse = (horse)=>{
+  console.log(horse)
+  return (dispatch)=>{
+    fetch(API_URL + `/horses/${horse.id}`, {
+      method: "PATCH",
       headers: authedHeaders(),
       body: JSON.stringify( {horse})
     })

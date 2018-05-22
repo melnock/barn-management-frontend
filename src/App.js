@@ -3,7 +3,10 @@ import './App.css';
 import {connect} from 'react-redux'
 import UserHorsesList from './containers/UserHorsesList'
 import Login from './containers/Login'
-import {Route, withRouter} from 'react-router-dom'
+import Signup from './components/Signup'
+import HorseShowPage from './components/HorseShowPage'
+import HorseCreationForm from './components/HorseCreationForm'
+import {Route, withRouter, Link} from 'react-router-dom'
 import {getUser, logout} from './actions/actions'
 
 class App extends Component {
@@ -29,9 +32,13 @@ class App extends Component {
             this.props.logout()
             this.props.history.push('/login')
           }}>Logout</button> : null}
+          <Link to="/home"> Home </Link>
         </header>
 				<Route path="/home" component={UserHorsesList}/>
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup}/>
+        <Route path="/horses/new" component={HorseCreationForm}/>
+        <Route path="/horses/:id" component={HorseShowPage}/>
 			</div>
     );
   }

@@ -1,11 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {selectedHorse} from '../actions/actions'
+import {withRouter} from 'react-router-dom'
 
 class HorseCard extends React.Component{
 
   handleClick=()=>{
     this.props.selectedHorse(this.props.horse)
+    this.props.history.push('/horses'+ `/${this.props.horse.id}`)
   }
 
   render(){
@@ -25,4 +27,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {selectedHorse})(HorseCard)
+export default withRouter(connect(mapStateToProps, {selectedHorse})(HorseCard))

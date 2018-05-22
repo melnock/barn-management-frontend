@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import HorseCard from '../components/HorseCard'
 import HorseShowPage from '../components/HorseShowPage'
 import HorseCreationForm from '../components/HorseCreationForm'
+import {withRouter} from 'react-router-dom'
 
 
 class UserHorsesList extends React.Component{
@@ -12,9 +13,7 @@ class UserHorsesList extends React.Component{
   }
 
   handleClick = (e)=>{
-    this.setState({
-      new_horse: !this.state.new_horse
-    })
+    this.props.history.push('/horses/new')
   }
 
   render(){
@@ -30,9 +29,9 @@ class UserHorsesList extends React.Component{
       <div>
         {this.props.current_barn ? <h1> Welcome to {this.props.current_barn.name}</h1> : "No Barn???"}
       <div className="horse-list">
-        {this.props.selectedHorse ? <HorseShowPage history={this.props.history}/> :
+        {this.props.selectedHorse ? <HorseShowPage/> :
         <div> {horses}
-        {this.state.new_horse ? <HorseCreationForm /> : <button onClick={this.handleClick}> Add A Horse </button>}
+        <button onClick={this.handleClick}> Add A Horse </button>
         </div>
 
         }

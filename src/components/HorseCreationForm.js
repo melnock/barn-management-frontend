@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {createHorse} from '../actions/actions'
+import {createHorse, editHorse} from '../actions/actions'
 import VetCreationForm from './VetCreationForm'
 import FarrierCreationForm from './FarrierCreationForm'
 
@@ -30,6 +30,7 @@ class HorseCreationForm extends React.Component{
     supplement:"",
     new_vet: false,
     new_farrier: false,
+    edit: false
   }
 
   componentDidMount(){
@@ -73,8 +74,14 @@ class HorseCreationForm extends React.Component{
 
   handleSubmit = (e)=>{
     e.preventDefault()
-    console.log(this.state.horse)
-    this.props.createHorse({...this.state.horse, barn_id: this.props.current_barn.id, user_id: this.props.currentUser.id})
+    if (this.state.edit){
+      this.props.editHorse({...this.state.horse, barn_id: this.props.current_barn.id, user_id: this.props.currentUser.id})
+      .then(this.props.history.push('/home'))
+    }
+    else{
+      this.props.createHorse({...this.state.horse, barn_id: this.props.current_barn.id, user_id: this.props.currentUser.id})
+      .then(this.props.history.push('/home'))
+    }
   }
 
   handleBlanketChange = (e)=>{
@@ -154,7 +161,8 @@ class HorseCreationForm extends React.Component{
 
   editHorse = ()=>{
     this.setState({
-      horse: {...this.props.selectedHorse}
+      horse: {...this.props.selectedHorse},
+      edit: true
     })
   }
 
@@ -268,4 +276,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {createHorse})(HorseCreationForm)
+export default connect(mapStateToProps, {createHorse, editHorse})(HorseCreationForm)

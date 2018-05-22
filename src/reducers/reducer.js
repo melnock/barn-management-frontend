@@ -25,6 +25,8 @@ export const reducer = (state=defaultState, action)=>{
       return {...state}
     case "CREATE_BARN":
       return {...state, barns:[...state.barns, action.payload], selectedBarn: action.payload.id}
+    case "CREATE_HORSE":
+      return {...state, horses:[...state.horses, action.payload], selectedHorse: action.payload}
     case "CREATE_VET":
       return {...state, vets:[...state.vets, action.payload]}
     case "CREATE_FARRIER":

@@ -1,22 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import BarnCard from '../components/BarnCard'
-import {fetchBarns} from '../actions/actions'
+import UserList from '../components/UserList'
+import {updateUser} from '../actions/actions'
 
 class ManagerDashboard extends React.Component{
 
   componentDidMount(){
-    this.props.fetchBarns()
+    this.props.updateUser()
   }
 
   render(){
-    console.log(this.props.barns)
-    const barns = this.props.barns.map((barn)=>{
-      return <BarnCard barn={barn} key={barn.id}/>
+    const users = this.props.users.map((user)=>{
+      return <UserList user={user} key={user.id}/>
     })
     return(
       <div>
-        {barns}
+        {users}
       </div>
     )
   }
@@ -24,7 +23,7 @@ class ManagerDashboard extends React.Component{
 
 function mapStateToProps(state){
   return{
-    barns: state.barns,
+    users: state.users,
   }
 }
-export default connect(mapStateToProps, {fetchBarns})(ManagerDashboard)
+export default connect(mapStateToProps, {updateUser})(ManagerDashboard)

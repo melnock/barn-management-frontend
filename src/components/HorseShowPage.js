@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {selectedHorse} from '../actions/actions'
 import ReportCard from './ReportCard'
 import HorseCreationForm from './HorseCreationForm'
+import {withRouter} from 'react-router-dom'
 
 class HorseShowPage extends React.Component{
   state={
@@ -36,9 +37,10 @@ class HorseShowPage extends React.Component{
           <p>Saddle:  {this.props.selectedHorse.tack.saddle}</p>
           <p>Bridle:  {this.props.selectedHorse.tack.bridle}</p>
           <p>Saddle Pads:  {this.props.selectedHorse.tack.saddle_pads}</p>
-          <p>Special Pads:  {this.props.selectedHorse.tack.special_pads}</p>
+          <p>Special Equipment:  {this.props.selectedHorse.tack.special_equipment}</p>
         </div>
-        <button onClick={()=>{this.props.select(null)}}> Go Back </button>
+        <button onClick={()=>{this.props.select(null)
+          this.props.history.push('/home')}}> Go Back </button>
         {this.props.currentUser.id === this.props.selectedHorse.user_id || this.props.currentUser.is_employee ? <button onClick={()=>{this.setState({show:false})}}> Add Report Card </button> : null}
         {this.props.currentUser.id === this.props.selectedHorse.user_id || this.props.currentUser.is_manager ? <button onClick={this.editHorse}> Edit Horse Info </button> : null}
       </div> : <ReportCard handleReportSubmit={this.handleReportSubmit}/>}
@@ -56,4 +58,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {select: selectedHorse})(HorseShowPage)
+export default withRouter(connect(mapStateToProps, {select: selectedHorse})(HorseShowPage))
