@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import UserManagerList from '../components/UserManagerList'
 import UserList from '../components/UserList'
 import {updateUser} from '../actions/actions'
 
@@ -17,9 +18,14 @@ class ManagerDashboard extends React.Component{
 
 
   render(){
+    const usersManager = this.props.users.map((user)=>{
+      return <UserManagerList user={user} key={user.id}/>
+    })
+
     const users = this.props.users.map((user)=>{
       return <UserList user={user} key={user.id}/>
     })
+
     const tack = this.props.horses.map((horse)=>{
       return(
         <tr value={horse.id} key={horse.id}>
@@ -74,6 +80,20 @@ class ManagerDashboard extends React.Component{
     </tbody>
     </table>
 
+    let fullStalls = 0
+    const mapStalls = this.props.stalls.map((stall)=>{
+      const horse = this.props.horses.find((h)=> h.stall_id === stall.id)
+      fullStalls = horse ? ++fullStalls : fullStalls
+      return(
+        <div className="stall-card" value={stall.id} key={stall.id}>
+          <p> {stall.stall_number}</p>
+          <p> {horse ? horse.name : "empty"} </p>
+        </div>
+      )
+    })
+
+    console.log(fullStalls)
+
     return(
       <div className="dashboard">
         <div className="accordion" onClick={this.handleAccordion}>
@@ -81,7 +101,7 @@ class ManagerDashboard extends React.Component{
           <span className="plus-accordion">+</span>
         </div>
         <div className="panel">
-          {this.props.currentUser.is_manager ? <div className="user-list"> {users} </div>: null}
+          {this.props.currentUser.is_manager ? <div className="user-list"> {usersManager} </div>: <div className="user-list">{users}</div>}
         </div>
         <div className="accordion" onClick={this.handleAccordion}>
           Tack
@@ -97,6 +117,13 @@ class ManagerDashboard extends React.Component{
         <div className="panel" >
           {this.props.currentUser.is_employee ? <div className="blanket-list"> {tableBlankets} </div> :null}
         </div>
+        <div className="accordion" onClick={this.handleAccordion}>
+          Stalls
+          <span className="plus-accordion">+</span>
+        </div>
+        <div className="panel" >
+          {this.props.currentUser.is_employee ? <div className="stall-list"><p className="stall-count"> Number of Empty Stalls: {this.props.current_barn.number_of_stalls - fullStalls}</p> {mapStalls} </div> :null}
+        </div>
       </div>
     )
   }
@@ -106,7 +133,10 @@ function mapStateToProps(state){
   return{
     users: state.users,
     horses: state.horses,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    stalls: state.stalls,
+    paddocks: state.paddocks,
+    current_barn: state.current_barn
   }
 }
 export default connect(mapStateToProps, {updateUser})(ManagerDashboard)

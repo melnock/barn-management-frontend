@@ -4,7 +4,7 @@ import {updateUser, selectedHorse} from '../actions/actions'
 import {withRouter} from 'react-router-dom'
 
 
-class UserList extends React.Component{
+class UserManagerList extends React.Component{
 
   state={
     manager: this.props.user.is_manager,
@@ -34,15 +34,24 @@ class UserList extends React.Component{
     })
     const employeeOwner =  this.props.user.is_employee ?
           <div><p>Employee</p>
+          <button name="promote" onClick={this.handleClick}>
+            Promote
+          </button>
           </div>
           :
           <div><p>Owner</p>
+          <button name="employ" onClick={this.handleClick}>
+            Employ
+            </button>
           </div>
     return(
       <div className="user-card">
         <p> {this.props.user.name} </p>
         {this.props.user.is_manager ? <div>
             <p>Manager | Employee</p>
+            <button name="demote" onClick={this.handleDemotion}>
+              Demote
+              </button>
             </div>
          :
           employeeOwner
@@ -64,4 +73,4 @@ function mapStateToProps(state){
 }
 
 
-export default withRouter(connect(mapStateToProps, {updateUser, selectedHorse})(UserList))
+export default withRouter(connect(mapStateToProps, {updateUser, selectedHorse})(UserManagerList))

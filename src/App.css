@@ -127,7 +127,7 @@ input[type=checkbox]{
 
 /* card styling */
 
-.horse-list, .barn-list, .user-list{
+.horse-list, .barn-list, .user-list, .stall-list{
   display:flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -135,9 +135,15 @@ input[type=checkbox]{
   width: 100%;
 }
 
+.stall-count{
+  margin-top: 5px;
+  font-size: 1em;
+  width: 100%;
+}
+
 .horse-card, .barn-card{
   box-shadow: 0 0 10px #BBB;
-  width: 30%;
+  width: 20%;
   background-color: #BBB;
   border-radius: 15px;
   color: #401863;
@@ -145,7 +151,16 @@ input[type=checkbox]{
 
 }
 
- .user-card{
+.stall-card{
+  width: 8%;
+  height: 40px;
+  background-color: #BBB;
+  padding: 5px;
+  margin: 2px;
+  color: #401863;
+}
+
+.user-card{
    width: 30%;
    background-color: #BBB;
    border-radius: 15px;
@@ -223,7 +238,7 @@ input[type=checkbox]{
     border: none;
     outline: none;
     transition: 0.4s;
-    margin: 10px auto;
+    margin: 5px auto;
     border-radius: 5px;
 }
 
@@ -239,7 +254,7 @@ input[type=checkbox]{
 
 /* Style the accordion panel. Note: hidden by default */
 .panel {
-    padding: 0 18px;
+    padding: 0 10px;
     display: none;
     overflow: hidden;
 }

@@ -27,12 +27,11 @@ class UserHorsesList extends React.Component{
         {this.props.current_barn ? <div><h1> Welcome to {this.props.current_barn.name}</h1><ManagerDashboard/></div> : "No Barn???"}
         <div className="horse-list">
           {this.props.selectedHorse ? <HorseShowPage/> :
-          <div>
-            {horses}
-          </div>
+
+            horses
+
           }
         </div>
-        <button onClick={this.handleClick}> Add A Horse </button>
 
       </div>
     )
