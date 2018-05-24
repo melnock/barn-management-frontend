@@ -42,6 +42,16 @@ p{
   font-size: .5em;
 }
 
+canvas{
+  width: 100% !important;
+  height: auto !important;
+}
+
+.chart{
+  width: 400px;
+  height: auto;
+}
+
 .nav a, .nav button{
   text-decoration: none;
   font-size: .75em;

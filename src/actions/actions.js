@@ -44,6 +44,7 @@ export function signup(email, password){
 }
 
 export function getUser(){
+  console.log("getting a user!!")
 	const token = localStorage.getItem("token")
 	return (dispatch) => {
 		return fetch(API_URL + "/get_user", {
@@ -229,6 +230,21 @@ export const updateUser = (user)=>{
     .then(r=>r.json())
     .then(userData => {
       console.log(userData)
+    })
+  }
+}
+
+export const submitImage = (image)=>{
+  console.log("upload", image)
+  return (dispatch)=>{
+    fetch(API_URL + `/horses`, {
+      method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify( {image})
+    })
+    .then(r=>r.json())
+    .then(imageData => {
+      console.log(imageData)
     })
   }
 }

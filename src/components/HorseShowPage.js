@@ -1,15 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {selectedHorse} from '../actions/actions'
+import {selectedHorse, getUser} from '../actions/actions'
 import ReportCard from './ReportCard'
 import HorseCreationForm from './HorseCreationForm'
 import {withRouter} from 'react-router-dom'
+import HorseManagerChart from './HorseManagerChart'
 
 class HorseShowPage extends React.Component{
   state={
     show: true,
     edit: false
   }
+
+
+    handleAccordion = (e)=>{
+      e.target.classList.toggle("active")
+      var panel = e.target.nextElementSibling;
+      if (panel.style.display === "block") {
+          panel.style.display = "none";
+      } else {
+          panel.style.display = "block";
+      }
+    }
+
 
   handleReportSubmit = ()=>{
     this.setState({
@@ -25,9 +38,24 @@ class HorseShowPage extends React.Component{
 
   render(){
     console.log("show-page", this.props)
+
+    if (this.props.selectedHorse){
     return(
       <div className="horse-card-show" >
       {this.state.show ? <div className="horse-card-show" >
+        {this.props.currentUser && (this.props.currentUser.id === this.props.selectedHorse.user_id || this.props.currentUser.is_manager) ?
+          <div className="dashboard">
+          <div className="accordion" onClick={this.handleAccordion}>
+            Health Reports
+            <span className="plus-accordion">+</span>
+          </div>
+          <div className="panel">
+            <HorseManagerChart />
+          </div>
+          </div>
+          :
+          null
+        }
         <h1> {this.props.selectedHorse.name}</h1>
         <img className="horse-show-image" alt="selectedHorse" src={this.props.selectedHorse.image}/>
         <h3> Stall: {this.props.selectedHorse.stall_id}</h3>
@@ -47,6 +75,9 @@ class HorseShowPage extends React.Component{
       {this.state.edit ? <HorseCreationForm /> : null}
       </div>
     )
+  } else {
+    return <h1>LOADING</h1>
+  }
   }
 }
 
@@ -58,4 +89,4 @@ function mapStateToProps(state){
 }
 
 
-export default withRouter(connect(mapStateToProps, {select: selectedHorse})(HorseShowPage))
+export default withRouter(connect(mapStateToProps, {select: selectedHorse, getUser: getUser})(HorseShowPage))

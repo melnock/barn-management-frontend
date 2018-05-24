@@ -13,6 +13,7 @@ import {getUser, logout} from './actions/actions'
 class App extends Component {
 
   componentDidMount(){
+    console.log("heelllllooo")
 		if (localStorage.getItem("token")){
 			this.props.getUser()
 			.then(() => {
