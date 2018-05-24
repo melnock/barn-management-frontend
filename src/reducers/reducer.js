@@ -8,7 +8,8 @@ const defaultState = {
   paddocks: [],
   stalls: [],
   vets: [],
-  farriers: []
+  farriers: [],
+  supplies: []
 }
 
 
@@ -16,7 +17,8 @@ export const reducer = (state=defaultState, action)=>{
   console.log(action)
   switch (action.type) {
     case 'LOGIN_USER':
-      return {...state, currentUser: action.payload.user,
+      return {...state,
+        currentUser: action.payload.user,
         users:[...action.payload.users],
         horses: [...action.payload.horses],
         current_barn:action.payload.current_barn,
@@ -25,7 +27,8 @@ export const reducer = (state=defaultState, action)=>{
         farriers: [...action.payload.farriers],
         paddocks: [...action.payload.paddocks],
         stalls: [...action.payload.stalls],
-        healthreports: [...action.payload.healthreports]
+        healthreports: [...action.payload.healthreports],
+        supplies: [...action.payload.supplies]
       }
     case 'SELECT_HORSE':
       return {...state, selectedHorse: action.payload}
@@ -45,6 +48,8 @@ export const reducer = (state=defaultState, action)=>{
       return {...state, farriers:[...state.farriers, action.payload]}
     case "FETCH_BARNS":
       return {...state, barns:[...action.payload]}
+    case "SUBMIT_SUPPLY":
+      return {...state, supplies:[...state.supplies, action.payload]}
     default:
       return state
   }

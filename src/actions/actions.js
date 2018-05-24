@@ -79,6 +79,23 @@ export const submitReportCard = (cardInfo)=>{
   }
 }
 
+export const createSupply = (supply)=>{
+  return (dispatch)=>{
+    return fetch(API_URL + '/supplies', {
+      method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify({...supply})
+    })
+    .then(r=>r.json())
+    .then(supplyData => {
+      return{
+        type: "SUBMIT_SUPPLY",
+        payload: supplyData
+      }
+    })
+  }
+}
+
 export const selectedHorse = (horse)=>{
   return {
     type: "SELECT_HORSE",

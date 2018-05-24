@@ -66,7 +66,11 @@ canvas{
 .mini-icon{
   border-radius: 60px;
   width: 25%;
-  height:auto;
+  height: 25%;
+}
+
+.mini-icon img{
+  object-fit: cover;
 }
 
 /* table styling */
@@ -92,6 +96,7 @@ td{
 
 tr{
   color: #BBB;
+  background-color: #452368;
 }
 
 tr:nth-child(even) {
@@ -137,12 +142,13 @@ input[type=checkbox]{
 
 /* card styling */
 
-.horse-list, .barn-list, .user-list, .stall-list{
+.horse-list, .barn-list, .user-list, .stall-list, .tack-list, .supply-list{
   display:flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin:auto;
   margin-top: 30px;
-  width: 100%;
+  width: 80%;
 }
 
 .stall-count{
@@ -158,16 +164,45 @@ input[type=checkbox]{
   border-radius: 15px;
   color: #401863;
   font-family: 'Arvo', serif;
-
+  margin: 5px;
 }
 
-.stall-card{
-  width: 8%;
+.stall-card-full{
+  width: 10%;
   height: 40px;
   background-color: #BBB;
   padding: 5px;
   margin: 2px;
   color: #401863;
+  font-size: .75em;
+}
+
+.supply{
+  width: 15%;
+  height: auto;
+  background-color: #BBB;
+  padding: 5px;
+  margin: 2px;
+  color: #401863;
+}
+
+.supply button{
+  width:100%;
+  background-color: #401863;
+  color: #BBB;
+}
+
+.supply-button{
+  width: 100%;
+}
+
+.stall-card{
+  width: 10%;
+  height: 40px;
+  background-color: #452368;
+  padding: 5px;
+  margin: 2px;
+  color: #BBB;
 }
 
 .user-card{

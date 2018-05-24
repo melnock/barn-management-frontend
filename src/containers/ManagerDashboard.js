@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import UserManagerList from '../components/UserManagerList'
 import UserList from '../components/UserList'
 import {updateUser} from '../actions/actions'
+import SupplyList from '../components/SupplyList'
 
 class ManagerDashboard extends React.Component{
 
@@ -85,7 +86,7 @@ class ManagerDashboard extends React.Component{
       const horse = this.props.horses.find((h)=> h.stall_id === stall.id)
       fullStalls = horse ? ++fullStalls : fullStalls
       return(
-        <div className="stall-card" value={stall.id} key={stall.id}>
+        <div className={horse ? "stall-card-full" : "stall-card"} value={stall.id} key={stall.id}>
           <p> {stall.stall_number}</p>
           <p> {horse ? horse.name : "empty"} </p>
         </div>
@@ -124,6 +125,14 @@ class ManagerDashboard extends React.Component{
         <div className="panel" >
           {this.props.currentUser.is_employee ? <div className="stall-list"><p className="stall-count"> Number of Empty Stalls: {this.props.current_barn.number_of_stalls - fullStalls}</p> {mapStalls} </div> :null}
         </div>
+        <div className="accordion" onClick={this.handleAccordion}>
+          Supplies
+          <span className="plus-accordion">+</span>
+        </div>
+        <div className="panel" >
+          {this.props.currentUser.is_employee ? <div className="supply-list"><SupplyList/></div> : null}
+        </div>
+
       </div>
     )
   }
