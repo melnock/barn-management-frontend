@@ -54,6 +54,10 @@ export const reducer = (state=defaultState, action)=>{
       return {...state, barns:[...action.payload]}
     case "UPDATE_USER":
       return {...state, users:[...action.payload]}
+    case "EDIT_MEAL":
+      return {...state, meals:[...action.payload.meals]}
+    case "EDIT_HORSE":
+      return {...state, horses:[...action.payload.horses], selectedHorse: action.payload.horse}
     case "SUBMIT_SUPPLY":
       return {...state, supplies:[...state.supplies, action.payload]}
     default:

@@ -177,7 +177,7 @@ input[type=checkbox]{
   font-size: .75em;
 }
 
-.supply, .meal-card{
+.supply{
   width: 15%;
   height: auto;
   background-color: #BBB;
@@ -185,6 +185,25 @@ input[type=checkbox]{
   margin: 2px;
   color: #401863;
 }
+
+.meal-card{
+  width: 1fr;
+  height: auto;
+  background-color: #BBB;
+  padding: 5px;
+  margin: 2px;
+  color: #401863;
+}
+
+.meal-card-edit{
+  width: 2fr;
+  height: auto;
+  background-color: #BBB;
+  padding: 5px;
+  margin: 2px;
+  color: #401863;
+}
+
 
 .supply button, .meal-card button{
   width:100%;

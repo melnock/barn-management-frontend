@@ -217,6 +217,23 @@ export const createMeal = (meal)=>{
   }
 }
 
+export const editMeal = (meal)=>{
+  return (dispatch)=>{
+    return fetch(API_URL + `/meals/${meal.id}`, {
+      method: "PATCH",
+      headers: authedHeaders(),
+      body: JSON.stringify({meal})
+    })
+    .then(r=>r.json())
+    .then(mealData => {
+      dispatch ({
+        type: "EDIT_MEAL",
+        payload: mealData
+      })
+    })
+  }
+}
+
 export const createHorse = (horse)=>{
   console.log(horse)
   return (dispatch)=>{
@@ -246,7 +263,7 @@ export const editHorse = (horse)=>{
     .then(r=>r.json())
     .then(horseData => {
       dispatch ({
-        type: "CREATE_HORSE",
+        type: "EDIT_HORSE",
         payload: horseData
       })
     })

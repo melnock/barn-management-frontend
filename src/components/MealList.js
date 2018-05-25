@@ -7,14 +7,8 @@ import MealForm from './MealForm'
 class MealList extends React.Component{
 
   state={
-    meal: {
-      supply_id: 0,
-      quantity: 0,
-      measurement:"",
-      supplements: false
-    },
     viewable: false,
-    addMeal: false
+    addMeal: false,
   }
 
   viewMeal = (e)=>{
@@ -24,6 +18,8 @@ class MealList extends React.Component{
     })
   }
 
+
+
   handleClick = (e)=>{
     e.preventDefault()
     this.setState({
@@ -32,7 +28,7 @@ class MealList extends React.Component{
   }
 
   render(){
-    console.log("meals", this.state)
+    console.log("meals", this.props)
     const mealmeals = this.props.meals.filter((s)=> s.horse_id === this.props.selectedHorse.id)
     const horseMeals = mealmeals.map((s, ind)=> <MealCard key={ind} meal={s} viewMeal={this.viewMeal} viewable={this.state.viewable}/>)
     return(
