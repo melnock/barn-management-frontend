@@ -72,9 +72,9 @@ export const submitReportCard = (cardInfo)=>{
     })
     .then(r=>r.json())
     .then(userData => {
-      return{
+      dispatch({
         type: "SUBMIT_REPORT_CARD"
-      }
+      })
     })
   }
 }
@@ -88,10 +88,10 @@ export const createSupply = (supply)=>{
     })
     .then(r=>r.json())
     .then(supplyData => {
-      return{
+      dispatch({
         type: "SUBMIT_SUPPLY",
         payload: supplyData
-      }
+      })
     })
   }
 }
@@ -200,6 +200,23 @@ export const createFarrier = (farrier)=>{
   }
 }
 
+export const createMeal = (meal)=>{
+  return (dispatch)=>{
+    return fetch(API_URL + '/meals', {
+      method: "POST",
+      headers: authedHeaders(),
+      body: JSON.stringify({meal})
+    })
+    .then(r=>r.json())
+    .then(mealData => {
+      dispatch ({
+        type: "CREATE_MEAL",
+        payload: mealData
+      })
+    })
+  }
+}
+
 export const createHorse = (horse)=>{
   console.log(horse)
   return (dispatch)=>{
@@ -246,7 +263,10 @@ export const updateUser = (user)=>{
     })
     .then(r=>r.json())
     .then(userData => {
-      console.log(userData)
+      dispatch({
+        type: "UPDATE_USER",
+        payload: userData
+      })
     })
   }
 }

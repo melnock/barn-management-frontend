@@ -9,7 +9,8 @@ const defaultState = {
   stalls: [],
   vets: [],
   farriers: [],
-  supplies: []
+  supplies: [],
+  meals:[]
 }
 
 
@@ -28,7 +29,8 @@ export const reducer = (state=defaultState, action)=>{
         paddocks: [...action.payload.paddocks],
         stalls: [...action.payload.stalls],
         healthreports: [...action.payload.healthreports],
-        supplies: [...action.payload.supplies]
+        supplies: [...action.payload.supplies],
+        meals: [...action.payload.meals]
       }
     case 'SELECT_HORSE':
       return {...state, selectedHorse: action.payload}
@@ -46,8 +48,12 @@ export const reducer = (state=defaultState, action)=>{
       return {...state, vets:[...state.vets, action.payload]}
     case "CREATE_FARRIER":
       return {...state, farriers:[...state.farriers, action.payload]}
+    case "CREATE_MEAL":
+      return {...state, meals:[...state.meals, action.payload]}
     case "FETCH_BARNS":
       return {...state, barns:[...action.payload]}
+    case "UPDATE_USER":
+      return {...state, users:[...action.payload]}
     case "SUBMIT_SUPPLY":
       return {...state, supplies:[...state.supplies, action.payload]}
     default:

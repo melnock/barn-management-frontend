@@ -5,6 +5,7 @@ import ReportCard from './ReportCard'
 import HorseCreationForm from './HorseCreationForm'
 import {withRouter} from 'react-router-dom'
 import HorseManagerChart from './HorseManagerChart'
+import MealList from './MealList'
 
 class HorseShowPage extends React.Component{
   state={
@@ -45,13 +46,20 @@ class HorseShowPage extends React.Component{
       {this.state.show ? <div className="horse-card-show" >
         {this.props.currentUser && (this.props.currentUser.id === this.props.selectedHorse.user_id || this.props.currentUser.is_manager) ?
           <div className="dashboard">
-          <div className="accordion" onClick={this.handleAccordion}>
-            Health Reports
-            <span className="plus-accordion">+</span>
-          </div>
-          <div className="panel">
-            <HorseManagerChart />
-          </div>
+            <div className="accordion" onClick={this.handleAccordion}>
+              Health Reports
+              <span className="plus-accordion">+</span>
+            </div>
+            <div className="panel">
+              <HorseManagerChart />
+            </div>
+            <div className="accordion" onClick={this.handleAccordion}>
+              Meals
+              <span className="plus-accordion">+</span>
+            </div>
+            <div className="panel">
+              <MealList />
+            </div>
           </div>
           :
           null

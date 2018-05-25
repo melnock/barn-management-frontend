@@ -142,7 +142,7 @@ input[type=checkbox]{
 
 /* card styling */
 
-.horse-list, .barn-list, .user-list, .stall-list, .tack-list, .supply-list{
+.horse-list, .barn-list, .user-list, .stall-list, .tack-list, .supply-list, .meal-list{
   display:flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -177,7 +177,7 @@ input[type=checkbox]{
   font-size: .75em;
 }
 
-.supply{
+.supply, .meal-card{
   width: 15%;
   height: auto;
   background-color: #BBB;
@@ -186,13 +186,13 @@ input[type=checkbox]{
   color: #401863;
 }
 
-.supply button{
+.supply button, .meal-card button{
   width:100%;
   background-color: #401863;
   color: #BBB;
 }
 
-.supply-button{
+.supply-button, .meal-button{
   width: 100%;
 }
 

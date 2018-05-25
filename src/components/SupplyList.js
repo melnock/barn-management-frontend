@@ -103,6 +103,7 @@ class SupplyList extends React.Component{
 }
 
 function mapStateToProps(state){
+  console.log("MSP", state.supplies);
   return{
     supplies: state.supplies
   }
