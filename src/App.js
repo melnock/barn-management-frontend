@@ -12,13 +12,14 @@ import {getUser, logout} from './actions/actions'
 
 class App extends Component {
 
+
   componentDidMount(){
-    console.log("heelllllooo")
 		if (localStorage.getItem("token")){
 			this.props.getUser()
 			.then(() => {
 				this.props.history.push('/home')
 			})
+
 		}else{
       this.props.history.push('/login')
     }
@@ -29,9 +30,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Stable Talk</h1>
-          {this.props.currentUser ? <NavBar/> : null}
+          <h1 className="App-title">&#9822;Stable Mate&#9822;</h1>
+          {this.props.currentUser ? <div><NavBar/></div> : null}
+
         </header>
+
 				<Route path="/home" component={UserHorsesList}/>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup}/>
@@ -47,7 +50,8 @@ function mapStateToProps(state){
     currentUser: state.currentUser,
     horses: state.horses,
     vets: state.vets,
-    farriers: state.farriers
+    farriers: state.farriers,
+    current_barn: state.current_barn
   }
 }
 

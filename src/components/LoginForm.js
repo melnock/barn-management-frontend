@@ -19,12 +19,17 @@ class LoginForm extends React.Component{
   handleSubmit = (e)=>{
     e.preventDefault()
     this.props.login(this.state.email, this.state.password)
-    .then(()=> this.props.history.push('/home'))
+    .then(()=> {
+      if (!this.props.errors) {
+        return this.props.history.push('/home')
+      }
+    })
   }
 
   render(){
     return(
-      <div>
+      <div className="login-form">
+        {this.props.errors.length ? this.props.errors.map((er)=> <p className="error">{er}</p>):null}
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="email" placeholder="email" onChange={this.handleChange} value={this.state.email}/>
           <input type="password" placeholder="password" name="password" onChange={this.handleChange} value={this.state.password}/>
@@ -35,5 +40,11 @@ class LoginForm extends React.Component{
   }
 }
 
+function mapStateToProps(state){
+  return{
+    errors: state.errors
+  }
+}
 
-export default withRouter(connect(null, {login})(LoginForm))
+
+export default withRouter(connect(mapStateToProps, {login})(LoginForm))

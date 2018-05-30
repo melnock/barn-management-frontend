@@ -13,7 +13,7 @@ class Login extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="login-flow">
         <LoginForm />
         <button onClick={this.handleClick}>Sign Up!</button>
         <BarnContainer />

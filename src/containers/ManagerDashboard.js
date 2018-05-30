@@ -81,6 +81,57 @@ class ManagerDashboard extends React.Component{
     </tbody>
     </table>
 
+    const meals = this.props.horses.map((horse)=>{
+      const horseMeals = this.props.meals.filter((meal) => {
+        return meal.horse_id === horse.id
+      })
+      const supplyQuantityMeasurement = (time)=>{
+        const meal = horseMeals.find((meal) => meal.time === time)
+        if (meal) {
+          const supply = this.props.supplies.find((s)=> s.id === meal.supply_id)
+          const quantity = meal.quantity
+          const measurement = meal.measurement
+          const supplements = meal.supplements ? " | " + "Supplements:" + horse.supplements.map((s)=>("| "+ s)) : ""
+          console.log(supplements)
+          return supply.name + " | " + supply.brand + " | " + quantity + " " + measurement +  supplements
+        }
+        else{
+          return "none"
+        }
+      }
+      return(
+        <tr value={horse.id} key={horse.id}>
+          <td> {horse.name} </td>
+          <td> {supplyQuantityMeasurement("am")} </td>
+          <td> {supplyQuantityMeasurement("am-hay")} </td>
+          <td> {supplyQuantityMeasurement("lunch")} </td>
+          <td> {supplyQuantityMeasurement("lunch-hay")} </td>
+          <td> {supplyQuantityMeasurement("pm")} </td>
+          <td> {supplyQuantityMeasurement("pm-hay")} </td>
+          <td> {supplyQuantityMeasurement("night-check")} </td>
+        </tr>
+
+      )
+    })
+
+    const tableMeals= <table>
+    <thead>
+      <tr>
+        <th> Horse Name </th>
+        <th> Grain AM </th>
+        <th> Hay AM</th>
+        <th> Grain Lunch </th>
+        <th> Hay Lunch </th>
+        <th> Grain PM </th>
+        <th> Hay PM</th>
+        <th> Night Check </th>
+      </tr>
+    </thead>
+    <tbody>
+      {meals}
+    </tbody>
+    </table>
+
     let fullStalls = 0
     const mapStalls = this.props.stalls.map((stall)=>{
       const horse = this.props.horses.find((h)=> h.stall_id === stall.id)
@@ -93,45 +144,64 @@ class ManagerDashboard extends React.Component{
       )
     })
 
-    console.log(fullStalls)
 
     return(
       <div className="dashboard">
         <div className="accordion" onClick={this.handleAccordion}>
           Boarders/Employees
-          <span className="plus-accordion">+</span>
+          <span className="plus-accordion">&#9816;</span>
         </div>
         <div className="panel">
           {this.props.currentUser.is_manager ? <div className="user-list"> {usersManager} </div>: <div className="user-list">{users}</div>}
         </div>
         <div className="accordion" onClick={this.handleAccordion}>
+          Barn Images
+          <span className="plus-accordion">&#9816;</span>
+        </div>
+        <div className="panel">
+          <div className="barn-images">
+            <img className="barn-img" alt="barn" src={this.props.current_barn.images.main}/>
+            <img className="barn-img" alt="barn" src={this.props.current_barn.images.indoor_arena}/>
+            <img className="barn-img" alt="barn" src={this.props.current_barn.images.outdoor_arena}/>
+            <img className="barn-img" alt="barn" src={this.props.current_barn.images.paddocks}/>
+          </div>
+        </div>
+        {this.props.currentUser.is_employee ? <div>
+        <div className="accordion" onClick={this.handleAccordion}>
           Tack
-          <span className="plus-accordion">+</span>
+          <span className="plus-accordion">&#9816;</span>
         </div>
         <div className="panel" >
-          {this.props.currentUser.is_employee ? <div className="tack-list"> {tableTack} </div> :null}
+          <div className="tack-list"> {tableTack} </div>
         </div>
         <div className="accordion" onClick={this.handleAccordion}>
           Blankets
-          <span className="plus-accordion">+</span>
+          <span className="plus-accordion">&#9816;</span>
         </div>
         <div className="panel" >
-          {this.props.currentUser.is_employee ? <div className="blanket-list"> {tableBlankets} </div> :null}
+          <div className="blanket-list"> {tableBlankets} </div>
+        </div>
+        <div className="accordion" onClick={this.handleAccordion}>
+          Meals
+          <span className="plus-accordion">&#9816;</span>
+        </div>
+        <div className="panel" >
+          <div className="meal-chart"> {tableMeals} </div>
         </div>
         <div className="accordion" onClick={this.handleAccordion}>
           Stalls
-          <span className="plus-accordion">+</span>
+          <span className="plus-accordion">&#9816;</span>
         </div>
         <div className="panel" >
-          {this.props.currentUser.is_employee ? <div className="stall-list"><p className="stall-count"> Number of Empty Stalls: {this.props.current_barn.number_of_stalls - fullStalls}</p> {mapStalls} </div> :null}
+          <div className="stall-list"><p className="stall-count"> Number of Empty Stalls: {this.props.current_barn.number_of_stalls - fullStalls}</p> {mapStalls} </div>
         </div>
         <div className="accordion" onClick={this.handleAccordion}>
           Supplies
-          <span className="plus-accordion">+</span>
+          <span className="plus-accordion">&#9816;</span>
         </div>
         <div className="panel" >
-          {this.props.currentUser.is_employee ? <div className="supply-list"><SupplyList/></div> : null}
-        </div>
+          <div className="supply-list"><SupplyList/></div>
+        </div></div> :null}
 
       </div>
     )
@@ -145,7 +215,9 @@ function mapStateToProps(state){
     currentUser: state.currentUser,
     stalls: state.stalls,
     paddocks: state.paddocks,
-    current_barn: state.current_barn
+    current_barn: state.current_barn,
+    meals: state.meals,
+    supplies: state.supplies
   }
 }
 export default connect(mapStateToProps, {updateUser})(ManagerDashboard)

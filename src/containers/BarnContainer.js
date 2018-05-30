@@ -11,6 +11,7 @@ class BarnContainer extends React.Component{
 
   render(){
     console.log(this.props.barns)
+
     const barns = this.props.barns.map((barn)=>{
       return <BarnCard barn={barn} key={barn.id}/>
     })

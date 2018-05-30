@@ -20,8 +20,9 @@ class MealForm extends React.Component{
   }
 
   handleCheckChange = (e)=>{
+    console.log("woo")
     this.setState({
-        [e.target.name]: !e.target.value
+        [e.target.name]: !this.state[e.target.name]
     })
   }
 
@@ -37,8 +38,8 @@ class MealForm extends React.Component{
   }
 
   render(){
-    console.log("meals", this.state)
     const horseYums = this.props.horseMeals.map((m)=> m.time)
+    console.log("meals", this.props.horseMeals[0])
     const mealTimesBase = ["am", "am-hay", "lunch", "lunch-hay", "pm", "pm-hay", "night check"]
     const mealTimes = mealTimesBase.filter(mt => !horseYums.includes(mt) )
     const mealTimesObj = mealTimes.map((t)=> <option value={t}> {t} </option>)
@@ -58,8 +59,8 @@ class MealForm extends React.Component{
            </select>
            <input type="number" onChange={this.handleChange} value={this.state.quantity} name="quantity" placeholder="amount"/>
            <input onChange={this.handleChange} value={this.state.measurement} name="measurement" placeholder="Measuring Tool/Weight"/>
-           Add Supplements? <input type="checkbox" onChange={this.handleCheckChange} value={this.state.supplements} name="supplements" placeholder="Supplements?"/>
-
+           <div className="form-sublabel">Add Supplements? <input type="checkbox" onChange={this.handleCheckChange} value={this.state.supplements} name="supplements" placeholder="Supplements?"/>
+           </div>
            <input type="submit"/>
          </form>
        </div>

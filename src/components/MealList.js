@@ -37,7 +37,7 @@ class MealList extends React.Component{
         <div className="meal-button">
           <button onClick={this.handleClick} name="addMeal"> {this.state.addMeal ? "Close Meal Form" : "Add a New Meal"} </button>
         </div>
-       {this.state.addMeal ? <MealForm horseMeals={horseMeals}/> : null}
+       {this.state.addMeal ? <MealForm horseMeals={mealmeals}/> : null}
       </div>
     )
   }

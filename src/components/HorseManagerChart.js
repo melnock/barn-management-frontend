@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import {Line} from 'react-chartjs-2'
-import Moment from 'react-moment'
+// import Moment from 'react-moment'
 
 class HorseManagerChart extends React.Component{
   state={
@@ -67,7 +67,7 @@ class HorseManagerChart extends React.Component{
     const prevMonth = ()=>{
       let d = new Date()
       for (let i=0; i<30; i++ ){
-        const dateToManipulate = d.setDate(d.getDate() - 1)
+        d.setDate(d.getDate() - 1)
         const monthToManipulate = months[d.getMonth()]
         const dayToManipulate = d.getDate()
         month.unshift(monthToManipulate + " " + dayToManipulate)
@@ -77,7 +77,7 @@ class HorseManagerChart extends React.Component{
 
     const labels = this.state.monthly ? prevMonth() : [...daysOfWeek.slice(daysOfWeek.indexOf(getDate)+1, daysOfWeek.length), ...daysOfWeek.slice(0, daysOfWeek.indexOf(getDate)+1)]
 
-    const horseDataEdited = this.state.monthly ? horseData : horseData.slice(horseData.length-7)
+    const horseDataEdited = this.state.monthly ? horseData.slice(horseData.length-30) : horseData.slice(horseData.length-7)
 
     const graindataset = horseDataEdited.map((h)=> h.grain)
     const haydataset = horseDataEdited.map((h)=> h.hay)

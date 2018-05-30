@@ -9,12 +9,12 @@ class NavBar extends Component {
   render(){
     return(
       <div className="nav">
-      <Link to="/home"> Home </Link>
-      <Link to="/newhorse"> Add a Horse </Link>
+      <Link to="/home"> &#9816; Home </Link>
+      <Link to="/newhorse"> &#9816; Add a Horse </Link>
       <button onClick={() => {
         this.props.logout()
         this.props.history.push('/login')
-      }}>Logout</button>
+      }}>&#9816; Logout</button>
       </div>
     )
   }

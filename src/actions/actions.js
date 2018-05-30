@@ -15,11 +15,18 @@ export function login(email, password){
 		})
 		.then(res => res.json())
 		.then(userData => {
-			localStorage.setItem("token", userData.jwt)
-			dispatch({
-				type: "LOGIN_USER",
-				payload: userData
-			})
+      if (userData.error) {
+        dispatch({
+          type: "LOGIN_ERRORS",
+          payload: userData.error
+        })
+      }else{
+        localStorage.setItem("token", userData.jwt)
+        dispatch({
+          type: "LOGIN_USER",
+          payload: userData
+        })
+      }
 		})
 	}
 }
@@ -34,11 +41,18 @@ export function signup(email, password){
 		})
 		.then(res => res.json())
 		.then(userData => {
-			localStorage.setItem("token", userData.jwt)
-			dispatch({
-				type: "LOGIN_USER",
-				payload: userData
-			})
+      if (userData.error) {
+        dispatch({
+          type: "LOGIN_ERRORS",
+          payload: userData.error
+        })
+      }else{
+  			localStorage.setItem("token", userData.jwt)
+  			dispatch({
+  				type: "LOGIN_USER",
+  				payload: userData
+  			})
+      }
 		})
 	}
 }
@@ -120,17 +134,24 @@ export function logout(){
 
 export const createUser = (user)=>{
   return (dispatch)=>{
-    fetch(API_URL + '/signup', {
+    return fetch(API_URL + '/signup', {
       method: "POST",
       headers: headers,
       body: JSON.stringify({ user })
     })
     .then(r=>r.json())
     .then(userData => {
-      dispatch ({
-        type: "LOGIN_USER",
-        payload:userData
-      })
+      if (userData.error) {
+        dispatch({
+          type: "LOGIN_ERRORS",
+          payload: userData.error
+        })
+      }else{
+        dispatch ({
+          type: "LOGIN_USER",
+          payload:userData
+        })
+      }
     })
   }
 }
@@ -151,17 +172,24 @@ export const fetchBarns = ()=>{
 
 export const createBarn = (barn)=>{
   return (dispatch)=>{
-    fetch(API_URL + '/newbarn', {
+    return fetch(API_URL + '/newbarn', {
       method: "POST",
       headers: headers,
       body: JSON.stringify({ barn:{...barn, images: {...barn.images}, amenities: [...barn.amenities]} })
     })
     .then(r=>r.json())
     .then(barnData => {
-      dispatch ({
-        type: "CREATE_BARN",
-        payload: barnData
-      })
+      if (barnData.error) {
+        dispatch({
+          type: "LOGIN_ERRORS",
+          payload: barnData.error
+        })
+      }else{
+        dispatch ({
+          type: "CREATE_BARN",
+          payload: barnData
+        })
+      }
     })
   }
 }
@@ -223,6 +251,22 @@ export const editMeal = (meal)=>{
       method: "PATCH",
       headers: authedHeaders(),
       body: JSON.stringify({meal})
+    })
+    .then(r=>r.json())
+    .then(mealData => {
+      dispatch ({
+        type: "EDIT_MEAL",
+        payload: mealData
+      })
+    })
+  }
+}
+
+export const mealDelete = (meal)=>{
+  return (dispatch)=>{
+    return fetch(API_URL + `/meals/${meal.id}`, {
+      method: "DELETE",
+      headers: authedHeaders(),
     })
     .then(r=>r.json())
     .then(mealData => {

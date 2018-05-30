@@ -5,31 +5,32 @@ body {
   font-size: 1em;
   width:80%;
   margin: auto;
-  /* font-family: 'Arvo', serif;
-  font-family: 'Pacifico', cursive; */
-  font-family: 'Ubuntu Condensed', sans-serif;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  font-family: 'Arvo', serif;
+  /* font-family: 'Pacifico', cursive; */
+  /* font-family: 'Lato', sans-serif; */
+  /* font-family: 'Ubuntu Condensed', sans-serif; */
 }
 
 .App-header {
+  background-image: url("https://i.imgur.com/AWU8AH7.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
   background-color: #BBB;
   font-family: 'Pacifico', cursive;
   height: 70px;
   padding: 10px;
-  color: #401863;
+  color: #FFF;
   margin: 20px;
-  width: 85%;
+  width: 100%;
   border-radius: 15px;
-  box-shadow: 0 0 10px #BBB;
+  box-shadow: 0 0 10px black;
 }
 
 .App-title {
-  font-size: 1em;
-  padding: 5px;
+  font-size: 2em;
+  padding-top: 0;
+  margin-top: -5px;
 }
 
 .App-intro {
@@ -56,9 +57,9 @@ canvas{
   text-decoration: none;
   font-size: .75em;
   padding: 0 30px;
-  margin: 3px;
   background-color: #401863;
   color: #BBB;
+  margin-top: -25px;
   border-style:none;
   width: 30%;
 }
@@ -106,12 +107,73 @@ tr:nth-child(even) {
 
 
 /* form styling */
+form{
+  width: 80%;
+  margin-left: 5%;
+  display:flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
 input{
   color: #401863;
   background-color: #BBB;
+  width: 70%;
+  margin: 8px 5px;
+  border-style: none;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+input[type=text]{
+    float:right;
+}
+
+.basic-info, .blankets, .user-info, .supplements, .barn-info, .images, .amenities, .tack, .login-form, .meal-form{
+  width:100%;
+  text-align: center;
+}
+
+.login-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.errors{
+  color: red;
+  font-size: 1em;
+}
+
+.login-form input{
   width: 60%;
-  margin: 8px 0;
+  margin:5px 18%;
+}
+.login-flow button{
+  width: 31%;
+  margin:5px 37%;
+}
+
+.blanket{
+  display:flex;
+  align-items: center;
+  width:100%
+}
+
+.blanket input[type=text], .blanket select{
+  width: 45%;
+}
+
+.form-label{
+  width: 100%;
+  background-color: rgb(187, 187, 187, .5);
+  font-size: .75em;
+  color: #401863;
+  margin:2px 5px 0 40px;
+  border-radius: 2px;
+}
+.form-sublabel{
+  width: 100%;
+  font-size: .75em;
 }
 
 button, input[type=submit], a{
@@ -119,14 +181,28 @@ button, input[type=submit], a{
   background-color: #BBB;
   border-radius: 5px;
   width: 41%;
-  margin: 8px 0;
+  margin: auto;
   font-family: 'Arvo', serif;
   border-style:none;
+}
+
+#already-user {
+  margin-right: 10%;
 }
 
 input[type=checkbox]{
   font-size: 1em;
   width: 3%
+}
+
+select{
+  width: 40%;
+  background-color: #BBB;
+  border-style: none;
+  color: #401863;
+  float:right;
+  margin-right: 19%;
+  margin-top: 5px;
 }
 
 .shorter-input{
@@ -140,9 +216,28 @@ input[type=checkbox]{
   margin: 5px;
 }
 
+.tack input[type=text]{
+  float:left;
+  margin:auto;
+}
+
+.array, .barn-extra-info-card ul{
+  list-style-type: none;
+}
+
+.vet-info, .farrier-info{
+  width:80%;
+  margin:5%;
+}
+
+.vet-info select, .farrier-info select{
+  float:none;
+  margin:auto;
+}
+
 /* card styling */
 
-.horse-list, .barn-list, .user-list, .stall-list, .tack-list, .supply-list, .meal-list{
+.horse-list, .barn-list, .user-list, .meal-chart, .stall-list, .tack-list, .supply-list, .meal-list, .blanket-list{
   display:flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -157,14 +252,23 @@ input[type=checkbox]{
   width: 100%;
 }
 
-.horse-card, .barn-card{
-  box-shadow: 0 0 10px #BBB;
-  width: 20%;
-  background-color: #BBB;
-  border-radius: 15px;
-  color: #401863;
+.weather{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* box-shadow: 0 0 10px black; */
+  width: 40%;
+  /* background-color: #BBB; */
+  /* border-radius: 15px; */
+  color: #BBB;
   font-family: 'Arvo', serif;
-  margin: 5px;
+  margin: auto;
+  font-size:.75em;
+}
+
+.weather img, .weather h5{
+  margin: 0;
+  padding:0;
 }
 
 .stall-card-full{
@@ -191,7 +295,7 @@ input[type=checkbox]{
   height: auto;
   background-color: #BBB;
   padding: 5px;
-  margin: 2px;
+  margin: 10px;
   color: #401863;
 }
 
@@ -232,15 +336,97 @@ input[type=checkbox]{
    font-family: 'Arvo', serif;
  }
 
-.horse-card img, .barn-card img{
-  width: 85%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #BBB;
+ .horse-card, .barn-card{
+   position: relative;
+   box-shadow: 0 0 10px black;
+   width: 20%;
+   height: 120px;
+   background-color: #BBB;
+   border-radius: 15px;
+   color: #401863;
+   font-family: 'Arvo', serif;
+   margin: 15px;
+ }
+ .barn-extra-info-card{
+   position: absolute;
+   right:-5px;
+   bottom: -5px;
+   box-shadow: 0 0 10px black;
+   width: 50%;
+   height: 115px;
+   padding-top: 5px;
+   background-color: #828282;
+   border-radius: 0 15px  15px 0px;
+   color: #BBB;
+   font-family: 'Arvo', serif;
+   font-size: .75em;
+   margin: 5px;
+ }
+
+ .barn-extra-info-card h5{
+   background-color: #585858;
+   padding:0;
+   margin:0;
+   position: absolute;
+   top:10px;
+   width:100%;
+ }
+
+ .barn-extra-info-card ul{
+   font-size:.75em;
+   position: absolute;
+   top:20px;
+   right: 4%;
+   width: 100%;
+ }
+
+ .chosen-barn-card{
+   width: 40%;
+   height: 120px;
+   background-color: #BBB;
+   border-radius: 15px;
+   color: #401863;
+   font-family: 'Arvo', serif;
+   margin: 5px;
+   position: relative;
+   box-shadow: 0 0 10px black;
+ }
+
+.horse-card img, .barn-card img, .chosen-barn-card img{
+  width: 100%;
+  background-size: contain;
+  height: 90px;
+  position: absolute;
+  bottom:0;
+  left:0;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 10px black;
 }
 
-.horse-card h1, .barn-card h1{
+.barn-img{
+  width: 20%;
+  background-size: contain;
+  height: 90px;
+  bottom:0;
+  left:0;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 10px black;
+}
+
+.chosen-barn-card img{
+  width:50%;
+  border-radius: 0 0 0px 10px;
+
+}
+
+.horse-card h1, .barn-card h1, .chosen-barn-card h1{
   font-size: 65%;
   border-radius: 10px;
+}
+
+.chosen-barn-card h1{
+  float:left;
+  padding-left: 5px;
 }
 
 .horse-card-report{
@@ -252,7 +438,7 @@ input[type=checkbox]{
   width: 40%;
   margin: 40px;
   border-radius: 10px;
-  box-shadow: 0 0 10px #BBB;
+  box-shadow: 0 0 10px black;
 }
 
 .label{
@@ -323,7 +509,34 @@ input[type=checkbox]{
     overflow: hidden;
 }
 
+.horse-info{
+  float: right;
+  width: 45%;
+}
+.horse-show-panel p{
+  font-size: .75em;
+}
+
+input:hover{
+  background-color: #AAA;
+  box-shadow: 0 0 10px #FFF;
+  border-radius: 3px;
+  padding-bottom: 3px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.barn-card:hover, .horse-card:hover, .accordion:hover, button:hover, a:hover, input[type=submit]:hover {
+  animation: wobble infinite 2s linear;
+}
+
+@keyframes wobble {
+  33% {
+  transform: translateX(-2px);
+  }
+  66% {
+  transform: translateX(2px);
+  } }

@@ -10,7 +10,8 @@ const defaultState = {
   vets: [],
   farriers: [],
   supplies: [],
-  meals:[]
+  meals:[],
+  errors:[]
 }
 
 
@@ -32,6 +33,8 @@ export const reducer = (state=defaultState, action)=>{
         supplies: [...action.payload.supplies],
         meals: [...action.payload.meals]
       }
+    case 'LOGIN_ERRORS':
+      return{...state, errors: [action.payload]}
     case 'SELECT_HORSE':
       return {...state, selectedHorse: action.payload}
     case 'SELECT_BARN':

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {} from '../actions/actions'
+import {mealDelete} from '../actions/actions'
 import {withRouter} from 'react-router-dom'
 import MealEditForm from './MealEditForm'
 
@@ -18,11 +18,15 @@ class MealCard extends React.Component{
     })
   }
 
+  handleDelete = (e)=>{
+    this.props.mealDelete(this.props.meal)
+  }
+
   render(){
     const supply = this.props.supplies.find((s)=> s.id === this.props.meal.supply_id)
     return(
       <div>
-        {!this.state.editable ? <div className="meal-card">
+        {!this.state.editable ? <div className="meal-card"><span id="meal-delete" onClick={this.handleDelete}>x</span>
           <p>{supply.name}</p>
           <p>{this.props.meal.time}</p>
           {this.props.viewable ? <div><p>{this.props.meal.quantity} {this.props.meal.measurement}</p> </div>: null }
@@ -48,4 +52,4 @@ function mapStateToProps(state){
 }
 
 
-export default withRouter(connect(mapStateToProps, {})(MealCard))
+export default withRouter(connect(mapStateToProps, {mealDelete})(MealCard))

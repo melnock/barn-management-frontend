@@ -3,13 +3,15 @@ import {connect} from 'react-redux'
 import HorseCard from '../components/HorseCard'
 import HorseShowPage from '../components/HorseShowPage'
 import ManagerDashboard from './ManagerDashboard'
-
+import Weather from './Weather'
 
 class UserHorsesList extends React.Component{
 
   state={
-    new_horse: false
+    new_horse: false,
   }
+
+
 
   handleClick = (e)=>{
     this.props.history.push('/newhorse')
@@ -24,7 +26,7 @@ class UserHorsesList extends React.Component{
 
     return(
       <div>
-        {this.props.current_barn ? <div><h1> Welcome to {this.props.current_barn.name}</h1><ManagerDashboard/></div> : "No Barn???"}
+        {this.props.current_barn ? <div><h1> Welcome to {this.props.current_barn.name}</h1><Weather/><ManagerDashboard/></div> : "No Barn???"}
         <div className="horse-list">
           {this.props.selectedHorse ? <HorseShowPage/> :
 
