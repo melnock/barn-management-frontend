@@ -8,7 +8,7 @@ https://www.fluidui.com/editor/live/project/p_yu5E5r9CZhixUXs4CTlhOD0zy91qQ3Jv
 
 ## Walkthrough
 
-[youtube link] (https://youtu.be/LR8W5VMKaxQ "Link to video walkthrough")
+[youtube link](https://youtu.be/LR8W5VMKaxQ "Link to video walkthrough")
 
 ## Set-Up
 
