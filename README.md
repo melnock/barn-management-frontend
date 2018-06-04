@@ -6,6 +6,10 @@ An application designed to make managing a Horse Barn simpler and more efficient
 
 https://www.fluidui.com/editor/live/project/p_yu5E5r9CZhixUXs4CTlhOD0zy91qQ3Jv 
 
+## Walkthrough
+
+[youtube link] (https://youtu.be/LR8W5VMKaxQ "Link to video walkthrough")
+
 ## Set-Up
 
 Fork and Clone this repository. 
