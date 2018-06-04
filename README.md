@@ -12,7 +12,12 @@ https://www.fluidui.com/editor/live/project/p_yu5E5r9CZhixUXs4CTlhOD0zy91qQ3Jv
 
 ## Set-Up
 
-Fork and Clone this repository. 
+Fork and Clone this repository and [this repository](https://github.com/melnock/barn-management-api "this repository"). 
+
+Follow instructions to set-up the API.
+
+Run `npm start`
+
 
 
 
