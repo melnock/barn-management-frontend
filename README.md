@@ -16,7 +16,7 @@ Fork and Clone this repository and [this repository](https://github.com/melnock/
 
 Follow instructions to set-up the API.
 
-Run `npm start`
+Run `npm install && npm start`
 
 
 
